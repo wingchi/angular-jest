@@ -20,7 +20,7 @@ export class WeatherComponent implements OnInit {
 
   getForecast() {
     this.forecast = this.weather.currentForecast$().pipe(
-      tap(data => console.log(data))
+      tap(data => console.log(data));
     );
   }
 

@@ -4,16 +4,16 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WeatherService {
   readonly WEATHER_URL = 'https://hidden-falls-83164.herokuapp.com/weather';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   currentForecast$(): Observable<any> {
-    return this.http.get(this.WEATHER_URL).pipe(
-      map(response => response['currently'])
-    );
+    return this.http
+      .get(this.WEATHER_URL)
+      .pipe(map(response => response['currently']));
   }
 }
