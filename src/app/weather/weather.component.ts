@@ -6,37 +6,41 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css']
+  styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
-
   forecast: Observable<any>;
 
-  constructor(private weather: WeatherService) { }
+  constructor(private weather: WeatherService) {}
 
   ngOnInit() {
     this.getForecast();
   }
 
   getForecast() {
-    this.forecast = this.weather.currentForecast$().pipe(
-      tap(data => console.log(data));
-    );
+    this.forecast = this.weather
+      .currentForecast$()
+      .pipe(tap(data => console.log(data)));
   }
 
-  weatherIcon(icon) {
+  weatherIcon(icon: string): string {
     const icons = {
       'partly-cloudy-day': 'wi wi-day-cloudy',
       'partly-cloudy-night': 'wi wi-night-alt-cloudy',
       'clear-day': 'wi wi-day-sunny',
       'clear-night': 'wi wi-night-clear',
-      'rain': 'wi wi-rain',
-      'snow': 'wi wi-snow',
-      'sleet': 'we-sleet',
-      'wind': 'wi wi-windy',
-      'fog': 'wi wi-fog',
-      'cloudy': 'wi wi-cloud',
+      rain: 'wi wi-rain',
+      snow: 'wi wi-snow',
+      sleet: 'we-sleet',
+      wind: 'wi wi-windy',
+      fog: 'wi wi-fog',
+      cloudy: 'wi wi-cloud',
     };
-    return icons[icon] || 'wi-day-cloudy';
+    return icons[icon] || 'wi wi-day-cloudy';
+  }
+
+  formatTemperature(temperature: number): string {
+    const rounded = Math.round(temperature);
+    return `${rounded}\xB0 F`;
   }
 }

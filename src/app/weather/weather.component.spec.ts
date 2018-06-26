@@ -33,4 +33,23 @@ describe('WeatherComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('formatTemperature', () => {
+    it('formatTemperature: should round 89.3 down and format it', () => {
+      const formattedTemperature = component.formatTemperature(89.3);
+      expect(formattedTemperature).toEqual('89\xB0 F');
+    });
+
+    it('formatTemperature: should round 89.5 up and format it', () => {
+      const formattedTemperature = component.formatTemperature(89.5);
+      expect(formattedTemperature).toEqual('90\xB0 F');
+    });
+  });
+
+  describe('weatherIcon', () => {
+    it('should have a default value of "wi wi-day-cloudy"', () => {
+      const defaultIcon = component.weatherIcon('unknown');
+      expect(defaultIcon).toEqual('wi wi-day-cloudy');
+    });
+  });
 });

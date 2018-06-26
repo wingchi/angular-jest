@@ -6,7 +6,7 @@
 
 <div *ngIf="forecast | async as f" class="columns">
   <i [class]="weatherIcon(f.icon)"></i>
-  <h3>{{ f.time * 1000 | date: 'MMM d' }}</h3>
-  <h2>{{ f.temperature }}</h2>
+  <h3>{{ f.time * 1000 | date: 'MMMM d' }}</h3>
+  <h2>{{ formatTemperature(f.temperature) }}</h2>
   <p>{{ f.summary }}</p>
 </div>
