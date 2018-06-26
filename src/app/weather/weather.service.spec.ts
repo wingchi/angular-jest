@@ -3,6 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { async } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { WeatherService } from './weather.service';
 
@@ -24,38 +25,39 @@ describe('WeatherService', () => {
     }),
   );
 
-  it(
-    'should be created',
+  it('should be created',
     inject([WeatherService], (service: WeatherService) => {
       expect(service).toBeTruthy();
     }),
   );
 
-  it('currentForecast$: should return the current forecast data', () => {
-    const mockWeather = {
-      latitude: 29.7604,
-      longitude: -95.3698,
-      timezone: 'America/Chicago',
-      currently: {
-        time: 1529987623,
-        summary: 'Humid',
-        icon: 'clear-night',
-        temperature: 90.01,
-      },
-    };
+  it('currentForecast$: should return the current forecast data',
+    async(() => {
+      const mockWeather = {
+        latitude: 29.7604,
+        longitude: -95.3698,
+        timezone: 'America/Chicago',
+        currently: {
+          time: 1529987623,
+          summary: 'Humid',
+          icon: 'clear-night',
+          temperature: 90.01,
+        },
+      };
 
-    service.currentForecast$().subscribe(data => {
-      expect(data.time).toEqual(1529987623);
-      expect(data.summary).toEqual('Humid');
-      expect(data.icon).toEqual('clear-night');
-      expect(data.temperature).toEqual(90.01);
-    });
+      service.currentForecast$().subscribe(data => {
+        expect(data.time).toEqual(1529987623);
+        expect(data.summary).toEqual('Humid');
+        expect(data.icon).toEqual('clear-night');
+        expect(data.temperature).toEqual(90.01);
+      });
 
-    const req = httpMock.expectOne(
-      'https://hidden-falls-83164.herokuapp.com/weather',
-    );
+      const req = httpMock.expectOne(
+        'https://hidden-falls-83164.herokuapp.com/weather',
+      );
 
-    req.flush(mockWeather);
-    httpMock.verify();
-  });
+      req.flush(mockWeather);
+      httpMock.verify();
+    }),
+  );
 });
