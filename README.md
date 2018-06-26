@@ -1,6 +1,10 @@
-# AngularJest
+# Angular with Jest Tests
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+This project demos some basic unit tests in Angular using the Jest testing framework.
+
+- Node: `8.11.3`
+- Angular CLI: `6.0.8`
+- Yarn: `1.7.0`
 
 ## Development server
 
@@ -16,11 +20,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `yarn test` to execute the unit tests via [Jest](http://jestjs.io/).
 
 ## Further help
 
